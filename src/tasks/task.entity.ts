@@ -13,8 +13,8 @@ export class Task {
        @Column({default: false})
        completada: boolean;
 
-       @Column()
-       descripcion: string | null;
+       @Column({ type: 'text', nullable: true })
+       descripcion: string;
 
        @CreateDateColumn()
        fechaCreacion: Date;
