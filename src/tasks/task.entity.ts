@@ -10,11 +10,11 @@ export class Task {
        @Column()
        titulo: string;
 
+       @Column({ nullable: true }) 
+       descripcion: string | null;
+
        @Column({default: false})
        completada: boolean;
-
-       @Column({ type: 'text', nullable: true })
-       descripcion: string;
 
        @CreateDateColumn()
        fechaCreacion: Date;
@@ -22,6 +22,6 @@ export class Task {
        @ManyToOne(() => User, (user)=> user.tareas, {eager: true})
        user: User;
 
-       @ManyToOne(() => Category, (category) => category.tasks)
+       @ManyToOne(() => Category, (category) => category.tareas)
        category: Category;
 }

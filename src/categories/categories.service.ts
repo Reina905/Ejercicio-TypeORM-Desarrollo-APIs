@@ -5,19 +5,19 @@ import { Category } from './category.entity';
 
 @Injectable()
 export class CategoryService {
-  constructor(
-    @InjectRepository(Category)
-    private categoryRepository: Repository<Category>,
-  ) {}
+       constructor(
+              @InjectRepository(Category)
+              private categoryRepository: Repository<Category>,
+       ) { }
 
-  // Crear categoría
-  create(category: Partial<Category>) {
-    const nuevaCategoria = this.categoryRepository.create(category);
-    return this.categoryRepository.save(nuevaCategoria);
-  }
+       // Crear categoría
+       async create(nombre: string): Promise<Category> {
+              const nueva = this.categoryRepository.create({ nombre });
+              return this.categoryRepository.save(nueva);
+       }
 
-  // Listar categorías
-  findAll() {
-    return this.categoryRepository.find();
-  }
+       // Listar categorías
+       async findAll(): Promise<Category[]> {
+              return this.categoryRepository.find();
+       }
 }

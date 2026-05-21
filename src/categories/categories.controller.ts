@@ -4,17 +4,17 @@ import { Category } from './category.entity';
 
 @Controller('categories')
 export class CategoryController {
-  constructor(private readonly categoryService: CategoryService) {}
+       constructor(private readonly categoryService: CategoryService) { }
 
-  // Crear categoría
-  @Post()
-  create(@Body() category: Partial<Category>) {
-    return this.categoryService.create(category);
-  }
+       // Crear categoría
+       @Post()
+       create(@Body() body: { nombre: string }): Promise<Category> {
+              return this.categoryService.create(body.nombre);
+       }
 
-  // Listar categorías
-  @Get()
-  findAll() {
-    return this.categoryService.findAll();
-  }
+       // Listar categorías
+       @Get()
+       findAll(): Promise<Category[]> {
+              return this.categoryService.findAll();
+       }
 }

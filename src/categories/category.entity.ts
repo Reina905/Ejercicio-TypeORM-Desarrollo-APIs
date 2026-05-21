@@ -10,5 +10,5 @@ export class Category {
   nombre: string;
 
   @OneToMany(() => Task, (task) => task.category)
-  tasks: Task[];
+  tareas: Task[];
 }
