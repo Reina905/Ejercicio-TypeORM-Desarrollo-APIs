@@ -8,7 +8,7 @@ async function bootstrap() {
     .setTitle('API de ejemplo')
     .setDescription('Documentacion de la API de ejemplo')
     .setVersion('1.0')
-    .addTag('usuarios')
+    .addTag('Users')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
