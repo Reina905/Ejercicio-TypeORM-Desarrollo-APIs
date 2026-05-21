@@ -22,6 +22,6 @@ export class Task {
        @ManyToOne(() => User, (user)=> user.tareas, {eager: true})
        user: User;
 
-       @ManyToOne(() => Category, (category) => category.tareas)
+       @ManyToOne(() => Category, (category) => category.tasks)
        category: Category;
 }
