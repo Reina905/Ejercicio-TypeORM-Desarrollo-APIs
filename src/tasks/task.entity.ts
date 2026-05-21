@@ -10,8 +10,8 @@ export class Task {
        @Column()
        titulo: string;
 
-       @Column({ nullable: true }) 
-       descripcion: string | null;
+       @Column({ nullable: true })
+       descripcion?: string;      
 
        @Column({default: false})
        completada: boolean;
