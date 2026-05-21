@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Task } from './task.entity';
 import { User } from 'src/users/user.entity';
+import { Category } from 'src/categories/category.entity';
 
 @Injectable()
 export class TasksService {
@@ -12,14 +13,22 @@ export class TasksService {
 
               @InjectRepository(User)
               private readonly usersRepository: Repository<User>,
+
+              @InjectRepository(Category)
+              private readonly categoryRepository: Repository<Category>,
        ) { }
-       async createTask(titulo: string, userID: number): Promise<Task>{
-              const user = this.usersRepository.findOne({where: {id: userID}});
+       async createTask(titulo: string, userID: number, categoriaId: number): Promise<Task>{
+              const user = await this.usersRepository.findOne({where: {id: userID}});
               if(!user){
                      throw new NotFoundException(`Usuario con ID ${userID} no encontrado`)
               }
 
-              const nueva = this.tasksRepository.create({titulo, user});
+              const category = await this.categoryRepository.findOne({where: { id: categoriaId }});
+              if (!category) {
+                     throw new NotFoundException(`Categoría con ID ${categoriaId} no encontrada`,);
+              }
+
+              const nueva = this.tasksRepository.create({titulo, user, category});
               return this.tasksRepository.save(nueva);
        }
        async findAll(): Promise<Task[]>{

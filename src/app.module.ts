@@ -5,8 +5,9 @@ import { UsersModule } from './users/users.module';
 import { TasksModule } from './tasks/tasks.module';
 import { User } from './users/user.entity';
 import { Task } from './tasks/task.entity';
+import { Category } from './categories/category.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserService } from './user/user.service';
+import { UsersService } from './users/users.service';
 import { CategoriesModule } from './categories/categories.module';
 
 @Module({
@@ -18,11 +19,13 @@ import { CategoriesModule } from './categories/categories.module';
       username: 'postgres',
       password: 'password',
       database: 'apicurso',
-      entities: [User, Task],
+      entities: [User, Task, Category],
       synchronize: true, //crea tablas automaticamente
     }),
     CategoriesModule,
+    UsersModule,
+    TasksModule
   ],
-  providers: [UserService],
+  providers: [UsersService],
 })
 export class AppModule {}
