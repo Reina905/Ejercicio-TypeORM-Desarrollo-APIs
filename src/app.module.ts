@@ -9,6 +9,9 @@ import { Category } from './categories/category.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersService } from './users/users.service';
 import { CategoriesModule } from './categories/categories.module';
+import { AuthService } from './auth/auth.service';
+import { AuthController } from './auth/auth.controller';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -24,8 +27,10 @@ import { CategoriesModule } from './categories/categories.module';
     }),
     CategoriesModule,
     UsersModule,
-    TasksModule
+    TasksModule,
+    AuthModule
   ],
-  providers: [UsersService],
+  providers: [UsersService, AuthService],
+  controllers: [AuthController],
 })
 export class AppModule {}
